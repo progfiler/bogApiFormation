@@ -42,8 +42,8 @@ public class ArticleController {
      * @return String
      */
     @GetMapping("{slug}")
-    public String findBySlug(@PathVariable String slug){
-        return "Je retourne l'article : " + slug;
+    public Article findBySlug(@PathVariable String slug){
+        return this.service.findBySlug(slug);
     }
 
     /**
@@ -62,8 +62,8 @@ public class ArticleController {
      * @return String
      */
     @PutMapping
-    public String update(@RequestBody Article article) {
-        return "Je mets à jour mon article";
+    public Article update(@RequestBody Article article) {
+        return this.service.save(article);
     }
 
     /**
@@ -72,7 +72,7 @@ public class ArticleController {
      */
     @DeleteMapping
     public void delete(@RequestBody Article article) {
-        System.out.println("Je supr mon article");
+        this.service.delete(article);
     }
 
 }

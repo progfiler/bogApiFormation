@@ -2,11 +2,7 @@ package fr.semifir.monBlog.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.semifir.monBlog.entities.Article;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
+import fr.semifir.monBlog.repositories.ArticleRepository;
 import java.util.List;
 
 /**
@@ -16,39 +12,39 @@ import java.util.List;
  */
 public class ArticleService {
 
-    /**
-        Je simule une base de données
-        Je réa un "bouchon"
-     */
-    private List<Article> articles = new ArrayList<>();
+    ArticleRepository repository;
 
-    /**
-        Dans le constructeur
-        Je mets des faux articles
-     */
-    public ArticleService() {
-        this.articles.add(new Article("Toto en vacances", "toto-en-vacances", "dzadfazdf"));
-        this.articles.add(new Article("Toto au toilettes", "toto-au-toilettes", "zefgzarg,gre g re ga eragar"));
+    public ArticleService(ArticleRepository repository) {
+        this.repository = repository;
     }
 
     /**
-     * On récupère une liste d'articles
-     * @return List<Article>
+     * Permet de retourner une liste d'articles
+     * @return
      */
     public List<Article> findAll() {
-        // Plus tards, cette méthode va nous permettre de communiquer
-        // avec le REPOSITORY -> BDD
-        return this.articles;
+        return this.repository.findAll();
+    }
+
+    public Article findBySlug(String slug) {
+        return this.repository.findBySlug(slug);
+    }
+
+
+    /**
+     * Permet de sauvegarder ou de mettre à jours un article
+     * @param article
+     * @return
+     */
+    public Article save(Article article) {
+        return this.repository.save(article);
     }
 
     /**
-     * On peu sauvegarder un article
-     * Ajouter à la liste "articles", un nouvel article
-     * @param  article
-     * @return Article
+     * Permet de supprimer un article
+     * @param article
      */
-    public Article save(Article article) {
-        this.articles.add(article);
-        return article;
+    public void delete(Article article) {
+        this.repository.delete(article);
     }
 }
