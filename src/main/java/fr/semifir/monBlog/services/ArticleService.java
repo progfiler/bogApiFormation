@@ -26,10 +26,14 @@ public class ArticleService {
         return this.repository.findAll();
     }
 
+    /**
+     * Permet de récuperer un article selon son slug
+     * @param slug
+     * @return
+     */
     public Article findBySlug(String slug) {
         return this.repository.findBySlug(slug);
     }
-
 
     /**
      * Permet de sauvegarder ou de mettre à jours un article
