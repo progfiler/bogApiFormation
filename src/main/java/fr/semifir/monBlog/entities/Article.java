@@ -24,4 +24,6 @@ public class Article {
     private String title;
     private String slug;
     private String content;
+    @DBRef
+    private Utilisateur utilisateur;
 }

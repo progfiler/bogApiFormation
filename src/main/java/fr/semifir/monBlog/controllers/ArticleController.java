@@ -75,4 +75,15 @@ public class ArticleController {
         this.service.delete(article);
     }
 
+
+    /**
+     * Méthode qui permet de récupérer une liste d'article
+     * selon l'id d'un utilisateur
+     * @param userId String
+     * @return List<Article>
+     */
+    @GetMapping("/utilisateurs/{userId}")
+    public List<Article> findArticleByUtilisateurId(@PathVariable String userId) {
+        return this.service.findArticleByUtilisateurId(userId);
+    }
 }

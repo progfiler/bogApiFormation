@@ -51,4 +51,8 @@ public class ArticleService {
     public void delete(Article article) {
         this.repository.delete(article);
     }
+
+    public List<Article> findArticleByUtilisateurId(String userId) {
+        return this.repository.findByUtilisateur_Id(userId);
+    }
 }
